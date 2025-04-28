@@ -1,10 +1,4 @@
----
-title: "README"
-output:
-  github_document:
-    pandoc_args: ["--wrap=none"]
-always_allow_html: true
----
+
 # Wine Quality Analysis
 
 ## Business Understanding
