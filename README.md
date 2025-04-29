@@ -3,6 +3,10 @@ README
 
 # Wine Quality Analysis
 
+## Research
+
+The data set that this study was based off on was retrieved from the UC Irvine machine learning repo. This data set highlights quality test of both red and white wine in two seperate csv files.
+
 ## Business Understanding
 
 A wine producer has hired us to explore what factors most influence wine quality.  
@@ -23,6 +27,15 @@ Each dataset contains physicochemical properties of wine samples and an associat
 
 - **Red Wine**: 1,599 samples (rows) and 12 features (columns) + 1 target variable (quality).
 - **White Wine**: 4,898 samples (rows) and 12 features (columns) + 1 target variable (quality).
+
+## Statistical Test: Correlation Between Alcohol and Quality
+
+**Hypothesis**
+
+- Null Hypothesis (H₀): There is **no correlation** between alcohol content and wine quality.
+- Alternative Hypothesis (H₁): There **is a correlation** between alcohol content and wine quality.
+
+Since both variables are continuous and normally distributed (assumption discussed below), a **Pearson correlation test** is appropriate.
 
 ### Feature Descriptions and Data Types
 
@@ -267,6 +280,71 @@ boxplot(white_wine$alcohol,
 ```
 
 ![](Wine_EDA_files/figure-gfm/unnamed-chunk-1-4.png)<!-- -->
+
+``` r
+### Statistical Test: Correlation Between Alcohol and Quality
+
+
+# Histogram of alcohol (red wine)
+hist(red_wine$alcohol, main = "Red Wine: Alcohol Distribution", xlab = "Alcohol", col = "tomato")
+```
+
+![](Wine_EDA_files/figure-gfm/unnamed-chunk-1-5.png)<!-- -->
+
+``` r
+# Histogram of quality (red wine)
+hist(red_wine$quality, main = "Red Wine: Quality Distribution", xlab = "Quality Score", col = "lightblue")
+```
+
+![](Wine_EDA_files/figure-gfm/unnamed-chunk-1-6.png)<!-- -->
+
+``` r
+# Pearson correlation test
+cor.test(red_wine$alcohol, red_wine$quality)
+```
+
+    ## 
+    ##  Pearson's product-moment correlation
+    ## 
+    ## data:  red_wine$alcohol and red_wine$quality
+    ## t = 21.639, df = 1597, p-value < 2.2e-16
+    ## alternative hypothesis: true correlation is not equal to 0
+    ## 95 percent confidence interval:
+    ##  0.4373540 0.5132081
+    ## sample estimates:
+    ##       cor 
+    ## 0.4761663
+
+``` r
+# Histogram of alcohol (white wine)
+hist(white_wine$alcohol, main = "White Wine: Alcohol Distribution", xlab = "Alcohol", col = "darkgreen")
+```
+
+![](Wine_EDA_files/figure-gfm/unnamed-chunk-1-7.png)<!-- -->
+
+``` r
+# Histogram of quality (white wine)
+hist(white_wine$quality, main = "White Wine: Quality Distribution", xlab = "Quality Score", col = "lightgray")
+```
+
+![](Wine_EDA_files/figure-gfm/unnamed-chunk-1-8.png)<!-- -->
+
+``` r
+# Pearson correlation test
+cor.test(white_wine$alcohol, white_wine$quality)
+```
+
+    ## 
+    ##  Pearson's product-moment correlation
+    ## 
+    ## data:  white_wine$alcohol and white_wine$quality
+    ## t = 33.858, df = 4896, p-value < 2.2e-16
+    ## alternative hypothesis: true correlation is not equal to 0
+    ## 95 percent confidence interval:
+    ##  0.4126015 0.4579941
+    ## sample estimates:
+    ##       cor 
+    ## 0.4355747
 
 ## Including Plots
 
