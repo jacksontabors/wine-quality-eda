@@ -30,12 +30,46 @@ Each dataset contains physicochemical properties of wine samples and an associat
 
 ## Statistical Test: Correlation Between Alcohol and Quality
 
-**Hypothesis**
+### Assumption Check: Alcohol and Quality (Red & White Wine)
 
-- Null Hypothesis (H₀): There is **no correlation** between alcohol content and wine quality.
-- Alternative Hypothesis (H₁): There **is a correlation** between alcohol content and wine quality.
+Before performing a Pearson correlation test, we must ensure the assumptions are met:
 
-Since both variables are continuous and normally distributed (assumption discussed below), a **Pearson correlation test** is appropriate.
+- Both variables (alcohol and quality) should be continuous ✔️
+- Both should be approximately normally distributed ✔️
+- The relationship should be approximately linear ➖
+
+**Findings:**
+
+- For both red and white wine:
+  - The histograms of `alcohol` and `quality` appear roughly bell-shaped, indicating approximate normality.
+  - The scatterplots suggest a somewhat linear trend between alcohol and quality, though not perfectly so.
+  - Given the large sample sizes (n = 1599 for red, n = 4898 for white), minor deviations from linearity and normality are acceptable due to the robustness of the Pearson correlation test.
+
+\##Corelation Test
+
+Now that the assumptions are reasonably met, we will use the **Pearson correlation test** to evaluate the strength and direction of the relationship between **alcohol content** and **wine quality**.
+
+We are testing the following hypotheses for both red and white wine:
+
+- **Null hypothesis (H₀):** There is no correlation between alcohol content and wine quality.
+- **Alternative hypothesis (H₁):** There is a significant correlation between alcohol content and wine quality.
+
+This test will help us determine whether wines with higher alcohol content tend to receive higher quality scores.
+
+### Findings
+
+The Pearson correlation test revealed a **moderate positive correlation** between alcohol content and wine quality in both red and white wine:
+
+- **Red Wine:**  
+  Correlation coefficient = **0.48**, p-value \< 2.2e-16  
+  This indicates a statistically significant positive correlation — as alcohol content increases, wine quality tends to increase as well.
+
+- **White Wine:**  
+  Correlation coefficient = **0.44**, p-value \< 2.2e-16  
+  This also shows a statistically significant positive relationship between alcohol and quality.
+
+In both cases, the p-values are extremely small (well below 0.05), so we reject the null hypothesis.  
+The results confirm our initial hypothesis that higher alcohol levels are associated with better quality ratings.
 
 ### Feature Descriptions and Data Types
 
@@ -282,24 +316,77 @@ boxplot(white_wine$alcohol,
 ![](Wine_EDA_files/figure-gfm/unnamed-chunk-1-4.png)<!-- -->
 
 ``` r
-### Statistical Test: Correlation Between Alcohol and Quality
+# Assumption Checks for Red Wine
 
-
-# Histogram of alcohol (red wine)
-hist(red_wine$alcohol, main = "Red Wine: Alcohol Distribution", xlab = "Alcohol", col = "tomato")
+# Alcohol distribution
+hist(red_wine$alcohol, 
+     main = "Red Wine: Alcohol Distribution", 
+     xlab = "Alcohol", 
+     col = "tomato")
 ```
 
 ![](Wine_EDA_files/figure-gfm/unnamed-chunk-1-5.png)<!-- -->
 
 ``` r
-# Histogram of quality (red wine)
-hist(red_wine$quality, main = "Red Wine: Quality Distribution", xlab = "Quality Score", col = "lightblue")
+# Quality distribution
+hist(red_wine$quality, 
+     main = "Red Wine: Quality Distribution", 
+     xlab = "Quality", 
+     col = "lightblue")
 ```
 
 ![](Wine_EDA_files/figure-gfm/unnamed-chunk-1-6.png)<!-- -->
 
 ``` r
-# Pearson correlation test
+# Alcohol vs Quality scatterplot
+plot(red_wine$alcohol, red_wine$quality, 
+     main = "Alcohol vs Quality (Red Wine)", 
+     xlab = "Alcohol", 
+     ylab = "Quality", 
+     col = "darkred", 
+     pch = 19)
+abline(lm(quality ~ alcohol, data = red_wine), col = "blue", lwd = 2)
+```
+
+![](Wine_EDA_files/figure-gfm/unnamed-chunk-1-7.png)<!-- -->
+
+``` r
+# Assumption Checks for White Wine
+
+# Alcohol distribution
+hist(white_wine$alcohol, 
+     main = "White Wine: Alcohol Distribution", 
+     xlab = "Alcohol", 
+     col = "lightgreen")
+```
+
+![](Wine_EDA_files/figure-gfm/unnamed-chunk-1-8.png)<!-- -->
+
+``` r
+# Quality distribution
+hist(white_wine$quality, 
+     main = "White Wine: Quality Distribution", 
+     xlab = "Quality", 
+     col = "gray")
+```
+
+![](Wine_EDA_files/figure-gfm/unnamed-chunk-1-9.png)<!-- -->
+
+``` r
+# Alcohol vs Quality scatterplot
+plot(white_wine$alcohol, white_wine$quality, 
+     main = "Alcohol vs Quality (White Wine)", 
+     xlab = "Alcohol", 
+     ylab = "Quality", 
+     col = "forestgreen", 
+     pch = 19)
+abline(lm(quality ~ alcohol, data = white_wine), col = "blue", lwd = 2)
+```
+
+![](Wine_EDA_files/figure-gfm/unnamed-chunk-1-10.png)<!-- -->
+
+``` r
+# Pearson correlation test for Red Wine
 cor.test(red_wine$alcohol, red_wine$quality)
 ```
 
@@ -316,21 +403,7 @@ cor.test(red_wine$alcohol, red_wine$quality)
     ## 0.4761663
 
 ``` r
-# Histogram of alcohol (white wine)
-hist(white_wine$alcohol, main = "White Wine: Alcohol Distribution", xlab = "Alcohol", col = "darkgreen")
-```
-
-![](Wine_EDA_files/figure-gfm/unnamed-chunk-1-7.png)<!-- -->
-
-``` r
-# Histogram of quality (white wine)
-hist(white_wine$quality, main = "White Wine: Quality Distribution", xlab = "Quality Score", col = "lightgray")
-```
-
-![](Wine_EDA_files/figure-gfm/unnamed-chunk-1-8.png)<!-- -->
-
-``` r
-# Pearson correlation test
+# Pearson correlation test for White Wine
 cor.test(white_wine$alcohol, white_wine$quality)
 ```
 
