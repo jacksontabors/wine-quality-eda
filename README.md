@@ -28,49 +28,6 @@ Each dataset contains physicochemical properties of wine samples and an associat
 - **Red Wine**: 1,599 samples (rows) and 12 features (columns) + 1 target variable (quality).
 - **White Wine**: 4,898 samples (rows) and 12 features (columns) + 1 target variable (quality).
 
-## Statistical Test: Correlation Between Alcohol and Quality
-
-### Assumption Check: Alcohol and Quality (Red & White Wine)
-
-Before performing a Pearson correlation test, we must ensure the assumptions are met:
-
-- Both variables (alcohol and quality) should be continuous ✔️
-- Both should be approximately normally distributed ✔️
-- The relationship should be approximately linear ➖
-
-**Findings:**
-
-- For both red and white wine:
-  - The histograms of `alcohol` and `quality` appear roughly bell-shaped, indicating approximate normality.
-  - The scatterplots suggest a somewhat linear trend between alcohol and quality, though not perfectly so.
-  - Given the large sample sizes (n = 1599 for red, n = 4898 for white), minor deviations from linearity and normality are acceptable due to the robustness of the Pearson correlation test.
-
-\##Corelation Test
-
-Now that the assumptions are reasonably met, we will use the **Pearson correlation test** to evaluate the strength and direction of the relationship between **alcohol content** and **wine quality**.
-
-We are testing the following hypotheses for both red and white wine:
-
-- **Null hypothesis (H₀):** There is no correlation between alcohol content and wine quality.
-- **Alternative hypothesis (H₁):** There is a significant correlation between alcohol content and wine quality.
-
-This test will help us determine whether wines with higher alcohol content tend to receive higher quality scores.
-
-### Findings
-
-The Pearson correlation test revealed a **moderate positive correlation** between alcohol content and wine quality in both red and white wine:
-
-- **Red Wine:**  
-  Correlation coefficient = **0.48**, p-value \< 2.2e-16  
-  This indicates a statistically significant positive correlation — as alcohol content increases, wine quality tends to increase as well.
-
-- **White Wine:**  
-  Correlation coefficient = **0.44**, p-value \< 2.2e-16  
-  This also shows a statistically significant positive relationship between alcohol and quality.
-
-In both cases, the p-values are extremely small (well below 0.05), so we reject the null hypothesis.  
-The results confirm our initial hypothesis that higher alcohol levels are associated with better quality ratings.
-
 ### Feature Descriptions and Data Types
 
 Below is a list of features included in the datasets, along with a brief description and the type of measurement:
@@ -273,51 +230,17 @@ sum(is.na(white_wine))
 
     ## [1] 0
 
-``` r
-# Corrected boxplots using periods
+## Statistical Test: Correlation Between Alcohol and Quality
 
-# Red wine residual sugar
-boxplot(red_wine$residual.sugar,
-        main = "Red Wine Residual Sugar", 
-        horizontal = TRUE, 
-        col = "pink")
-```
+### Assumption Check: Alcohol and Quality (Red & White Wine)
 
-![](Wine_EDA_files/figure-gfm/unnamed-chunk-1-1.png)<!-- -->
+Before performing a Pearson correlation test, we must ensure the assumptions are met:
+
+- Both variables (alcohol and quality) should be continuous ✔️
+- Both should be approximately normally distributed ✔️
+- The relationship should be approximately linear ➖
 
 ``` r
-# White wine residual sugar
-boxplot(white_wine$residual.sugar,
-        main = "White Wine Residual Sugar", 
-        horizontal = TRUE, 
-        col = "lightgreen")
-```
-
-![](Wine_EDA_files/figure-gfm/unnamed-chunk-1-2.png)<!-- -->
-
-``` r
-# Red wine alcohol
-boxplot(red_wine$alcohol,
-        main = "Red Wine Alcohol Content", 
-        horizontal = TRUE, 
-        col = "lightblue")
-```
-
-![](Wine_EDA_files/figure-gfm/unnamed-chunk-1-3.png)<!-- -->
-
-``` r
-# White wine alcohol
-boxplot(white_wine$alcohol,
-        main = "White Wine Alcohol Content", 
-        horizontal = TRUE, 
-        col = "lightyellow")
-```
-
-![](Wine_EDA_files/figure-gfm/unnamed-chunk-1-4.png)<!-- -->
-
-``` r
-# Assumption Checks for Red Wine
-
 # Alcohol distribution
 hist(red_wine$alcohol, 
      main = "Red Wine: Alcohol Distribution", 
@@ -325,7 +248,7 @@ hist(red_wine$alcohol,
      col = "tomato")
 ```
 
-![](Wine_EDA_files/figure-gfm/unnamed-chunk-1-5.png)<!-- -->
+![](Wine_EDA_files/figure-gfm/unnamed-chunk-2-1.png)<!-- -->
 
 ``` r
 # Quality distribution
@@ -335,7 +258,7 @@ hist(red_wine$quality,
      col = "lightblue")
 ```
 
-![](Wine_EDA_files/figure-gfm/unnamed-chunk-1-6.png)<!-- -->
+![](Wine_EDA_files/figure-gfm/unnamed-chunk-2-2.png)<!-- -->
 
 ``` r
 # Alcohol vs Quality scatterplot
@@ -348,7 +271,7 @@ plot(red_wine$alcohol, red_wine$quality,
 abline(lm(quality ~ alcohol, data = red_wine), col = "blue", lwd = 2)
 ```
 
-![](Wine_EDA_files/figure-gfm/unnamed-chunk-1-7.png)<!-- -->
+![](Wine_EDA_files/figure-gfm/unnamed-chunk-2-3.png)<!-- -->
 
 ``` r
 # Assumption Checks for White Wine
@@ -360,7 +283,7 @@ hist(white_wine$alcohol,
      col = "lightgreen")
 ```
 
-![](Wine_EDA_files/figure-gfm/unnamed-chunk-1-8.png)<!-- -->
+![](Wine_EDA_files/figure-gfm/unnamed-chunk-2-4.png)<!-- -->
 
 ``` r
 # Quality distribution
@@ -370,7 +293,7 @@ hist(white_wine$quality,
      col = "gray")
 ```
 
-![](Wine_EDA_files/figure-gfm/unnamed-chunk-1-9.png)<!-- -->
+![](Wine_EDA_files/figure-gfm/unnamed-chunk-2-5.png)<!-- -->
 
 ``` r
 # Alcohol vs Quality scatterplot
@@ -383,7 +306,23 @@ plot(white_wine$alcohol, white_wine$quality,
 abline(lm(quality ~ alcohol, data = white_wine), col = "blue", lwd = 2)
 ```
 
-![](Wine_EDA_files/figure-gfm/unnamed-chunk-1-10.png)<!-- -->
+![](Wine_EDA_files/figure-gfm/unnamed-chunk-2-6.png)<!-- --> **Findings:**
+
+- For both red and white wine:
+  - The histograms of `alcohol` and `quality` appear roughly bell-shaped, indicating approximate normality.
+  - The scatterplots suggest a somewhat linear trend between alcohol and quality, though not perfectly so.
+  - Given the large sample sizes (n = 1599 for red, n = 4898 for white), minor deviations from linearity and normality are acceptable due to the robustness of the Pearson correlation test.
+
+**Corelation Test**
+
+Now that the assumptions are reasonably met, we will use the **Pearson correlation test** to evaluate the strength and direction of the relationship between **alcohol content** and **wine quality**.
+
+We are testing the following hypotheses for both red and white wine:
+
+- **Null hypothesis (H₀):** There is no correlation between alcohol content and wine quality.
+- **Alternative hypothesis (H₁):** There is a significant correlation between alcohol content and wine quality.
+
+This test will help us determine whether wines with higher alcohol content tend to receive higher quality scores.
 
 ``` r
 # Pearson correlation test for Red Wine
@@ -419,7 +358,33 @@ cor.test(white_wine$alcohol, white_wine$quality)
     ##       cor 
     ## 0.4355747
 
+### Findings
+
+The Pearson correlation test revealed a **moderate positive correlation** between alcohol content and wine quality in both red and white wine:
+
+- **Red Wine:**  
+  Correlation coefficient = **0.48**, p-value \< 2.2e-16  
+  This indicates a statistically significant positive correlation — as alcohol content increases, wine quality tends to increase as well.
+
+- **White Wine:**  
+  Correlation coefficient = **0.44**, p-value \< 2.2e-16  
+  This also shows a statistically significant positive relationship between alcohol and quality.
+
+In both cases, the p-values are extremely small (well below 0.05), so we reject the null hypothesis.  
+The results confirm our initial hypothesis that higher alcohol levels are associated with better quality ratings.
+
 ## Including Plots
+
+### Boxplots: Alcohol Content by Wine Quality
+
+These boxplots are used to visually explore the relationship between **alcohol content** and **wine quality scores** for both red and white wines.
+
+**What we hope to find:**
+
+We are looking for a trend where higher quality wines tend to have **higher alcohol content**.  
+If this is the case, we would expect to see: - The **median alcohol level increasing** as the quality score increases. - A **visible upward shift** in the boxplot distribution as quality improves.
+
+These visual patterns will help us determine whether alcohol may be a strong predictor of wine quality, guiding our later hypothesis testing and statistical analysis.
 
 ``` r
 # Boxplot of Alcohol vs Quality (Red Wine)
@@ -429,7 +394,7 @@ boxplot(alcohol ~ quality, data = red_wine,
         col = "tomato")
 ```
 
-![](Wine_EDA_files/figure-gfm/unnamed-chunk-2-1.png)<!-- -->
+![](Wine_EDA_files/figure-gfm/unnamed-chunk-4-1.png)<!-- -->
 
 ``` r
 # Boxplot of Alcohol vs Quality (White Wine)
@@ -439,6 +404,205 @@ boxplot(alcohol ~ quality, data = white_wine,
         col = "lightblue")
 ```
 
-![](Wine_EDA_files/figure-gfm/unnamed-chunk-2-2.png)<!-- -->
+![](Wine_EDA_files/figure-gfm/unnamed-chunk-4-2.png)<!-- -->
+
+### Analysis: Alcohol Content by Quality Score
+
+The boxplots for both red and white wine show a clear upward trend in alcohol content as wine quality increases.
+
+In **red wine**, the median alcohol content steadily increases from quality score 3 to 8. The interquartile ranges (IQRs) also shift upward, indicating that higher-quality red wines tend to have higher alcohol content. The spread of alcohol values narrows slightly at higher quality levels, suggesting more consistency in alcohol levels among better-rated wines.
+
+In **white wine**, the pattern is similar. Although there’s a bit more variability in lower quality scores, the overall trend still shows an upward shift in median alcohol content as quality increases, especially from quality 6 onward.
+
+These patterns support the hypothesis that **alcohol content is positively associated with wine quality**, which aligns with our later correlation test findings. Higher alcohol levels may contribute to characteristics like body and flavor intensity, which could positively influence quality ratings.
+
+### Volatile Acidity by Quality
+
+Volatile acidity reflects the level of acetic acid (vinegar-like sourness) in the wine.  
+High volatile acidity is generally considered a negative quality in wine, as it can give an undesirable sharp or sour taste.
+
+These boxplots help us investigate whether lower volatile acidity is associated with higher quality scores in both red and white wine.
+
+``` r
+# Volatile Acidity vs Quality - Red Wine
+boxplot(`volatile.acidity` ~ quality, data = red_wine,
+        main = "Red Wine: Volatile Acidity by Quality",
+        xlab = "Quality Score", ylab = "Volatile Acidity",
+        col = "salmon")
+```
+
+![](Wine_EDA_files/figure-gfm/unnamed-chunk-5-1.png)<!-- -->
+
+``` r
+# Volatile Acidity vs Quality - White Wine
+boxplot(`volatile.acidity` ~ quality, data = white_wine,
+        main = "White Wine: Volatile Acidity by Quality",
+        xlab = "Quality Score", ylab = "Volatile Acidity",
+        col = "khaki")
+```
+
+![](Wine_EDA_files/figure-gfm/unnamed-chunk-5-2.png)<!-- -->
+
+### Findings: Volatile Acidity by Quality
+
+In both red and white wines, volatile acidity **decreases as quality scores increase**.
+
+- **Red Wine:** There is a clear downward trend — higher-quality wines (scores 6 to 8) show noticeably lower median and overall volatile acidity compared to lower-quality wines (scores 3 to 5). This supports the idea that **lower volatile acidity is associated with better sensory evaluation**, likely due to reduced vinegary or sour notes.
+
+- **White Wine:** The trend is more subtle, but still visible. The median volatile acidity values remain lower for higher quality scores (6 and above), with less variation. Outliers are more frequent in lower-quality wines, which may indicate inconsistent fermentation or quality control.
+
+These results align with expectations and suggest that **volatile acidity is negatively correlated with wine quality**, especially for red wines.
+
+### Residual Sugar by Quality
+
+Residual sugar refers to the amount of sugar left in the wine after fermentation.  
+While some sweetness can improve certain wine styles, **excessive sugar can indicate poor fermentation** or imbalance — especially in dry wines.
+
+These boxplots help us explore whether residual sugar shows a consistent relationship with wine quality in both red and white wines.
+
+``` r
+# Residual Sugar vs Quality - Red Wine
+boxplot(`residual.sugar` ~ quality, data = red_wine,
+        main = "Red Wine: Residual Sugar by Quality",
+        xlab = "Quality Score", ylab = "Residual Sugar (g/L)",
+        col = "lightpink")
+```
+
+![](Wine_EDA_files/figure-gfm/unnamed-chunk-6-1.png)<!-- -->
+
+``` r
+# Residual Sugar vs Quality - White Wine
+boxplot(`residual.sugar` ~ quality, data = white_wine,
+        main = "White Wine: Residual Sugar by Quality",
+        xlab = "Quality Score", ylab = "Residual Sugar (g/L)",
+        col = "lightcyan")
+```
+
+![](Wine_EDA_files/figure-gfm/unnamed-chunk-6-2.png)<!-- --> \### Findings: Residual Sugar by Quality
+
+Residual sugar does not show a strong or consistent relationship with wine quality in either dataset.
+
+- **Red Wine:** The median sugar levels remain fairly stable across all quality scores, with only minor variation. The presence of outliers in every group suggests that residual sugar is **not a strong differentiator** for red wine quality.
+
+- **White Wine:** There’s more variation overall, with some extreme outliers—especially at quality scores 5 and 6—but the medians again stay relatively flat. Interestingly, higher quality wines (scores 8 and 9) show lower and more tightly clustered sugar levels, which may suggest that **less sweetness is preferred** in higher-quality white wines.
+
+Overall, the boxplots suggest that residual sugar likely plays a **secondary role** in determining wine quality, especially compared to variables like alcohol or acidity.
+
+### pH by Quality
+
+The pH level indicates the **acidity strength** of the wine — not how sour it tastes (which is measured separately), but how chemically acidic it is.  
+Most wines fall between pH 2.9 and 4.2. A lower pH typically means **sharper, crisper acidity**, while a higher pH indicates a **softer, rounder** profile.
+
+These boxplots explore whether wine quality ratings tend to vary with changes in pH levels.
+
+``` r
+# pH vs Quality - Red Wine
+boxplot(pH ~ quality, data = red_wine,
+        main = "Red Wine: pH by Quality",
+        xlab = "Quality Score", ylab = "pH",
+        col = "lightgreen")
+```
+
+![](Wine_EDA_files/figure-gfm/unnamed-chunk-7-1.png)<!-- -->
+
+``` r
+# pH vs Quality - White Wine
+boxplot(pH ~ quality, data = white_wine,
+        main = "White Wine: pH by Quality",
+        xlab = "Quality Score", ylab = "pH",
+        col = "palegreen")
+```
+
+![](Wine_EDA_files/figure-gfm/unnamed-chunk-7-2.png)<!-- --> \### Findings: pH by Quality
+
+The relationship between pH and wine quality appears weak or inconsistent in both red and white wines.
+
+- **Red Wine:** Median pH values remain fairly stable across all quality scores, typically ranging from about 3.2 to 3.4. While there’s a slight dip in the highest quality group (score 8), the trend is not strong enough to suggest a clear relationship between pH and quality.
+
+- **White Wine:** Similarly, the distribution of pH values is consistent across quality levels, with only a slight upward shift for the highest quality wines (scores 8 and 9). However, this variation is small and likely not meaningful on its own.
+
+Overall, pH does **not appear to be a strong indicator of wine quality**, and may be more relevant in interaction with other variables like acidity or sulfur levels.
+
+### Total Sulfur Dioxide by Quality
+
+Sulfur dioxide (SO₂) is used in winemaking as an antimicrobial and antioxidant.  
+While it’s important for preserving wine, excessive levels can lead to undesirable smells or flavors.
+
+These boxplots show how total SO₂ levels vary across different wine quality scores and help us assess whether **lower or more moderate SO₂ levels** are associated with better-rated wines.
+
+``` r
+# Total Sulfur Dioxide vs Quality - Red Wine
+boxplot(`total.sulfur.dioxide` ~ quality, data = red_wine,
+        main = "Red Wine: Total Sulfur Dioxide by Quality",
+        xlab = "Quality Score", ylab = "Total SO₂ (mg/L)",
+        col = "orange")
+```
+
+![](Wine_EDA_files/figure-gfm/unnamed-chunk-8-1.png)<!-- -->
+
+``` r
+# Total Sulfur Dioxide vs Quality - White Wine
+boxplot(`total.sulfur.dioxide` ~ quality, data = white_wine,
+        main = "White Wine: Total Sulfur Dioxide by Quality",
+        xlab = "Quality Score", ylab = "Total SO₂ (mg/L)",
+        col = "gold")
+```
+
+![](Wine_EDA_files/figure-gfm/unnamed-chunk-8-2.png)<!-- --> \### Findings: Total Sulfur Dioxide by Quality
+
+Total sulfur dioxide shows an inverse relationship with wine quality, particularly in white wines.
+
+- **Red Wine:** While there is some fluctuation, the highest quality scores (7–8) generally have **lower sulfur dioxide levels** compared to lower-quality wines. The middle range (score 5) shows the highest variability and median.
+
+- **White Wine:** A **clear downward trend** is visible — higher quality wines consistently show **lower sulfur dioxide concentrations**, with reduced variability. Lower-quality white wines (scores 3–5) tend to have both higher levels and more spread, indicating inconsistent control of SO₂.
+
+These plots support the idea that **lower and more controlled sulfur dioxide levels are associated with higher wine quality**, especially in white wines where sulfur dioxide is used more heavily during processing.
+
+### Citric Acid by Quality
+
+Citric acid is a type of fixed acidity that contributes to a wine’s **freshness and crispness**.  
+It is naturally present in grapes but may also be added in small amounts during winemaking. A balanced level of citric acid can enhance flavor, while too much may create harshness.
+
+The boxplots below explore whether citric acid levels vary meaningfully across different wine quality ratings.
+
+``` r
+# Red Wine: Citric Acid
+boxplot(`citric.acid` ~ quality, data = red_wine,
+        main = "Red Wine: Citric Acid by Quality",
+        xlab = "Quality Score", ylab = "Citric Acid",
+        col = "violet")
+```
+
+![](Wine_EDA_files/figure-gfm/unnamed-chunk-9-1.png)<!-- -->
+
+``` r
+# White Wine: Citric Acid
+boxplot(`citric.acid` ~ quality, data = white_wine,
+        main = "White Wine: Citric Acid by Quality",
+        xlab = "Quality Score", ylab = "Citric Acid",
+        col = "plum")
+```
+
+![](Wine_EDA_files/figure-gfm/unnamed-chunk-9-2.png)<!-- --> \### Findings: Citric Acid by Quality
+
+Citric acid shows a mild positive relationship with wine quality, particularly in red wine.
+
+- **Red Wine:** There is a clear upward trend in median citric acid levels as quality scores increase. The lowest quality wines (score 3) have the lowest median and widest spread, while higher quality wines (scores 6–8) show more concentrated and elevated citric acid levels. This suggests that **higher citric acid may contribute positively to perceived quality**, possibly due to its effect on acidity balance.
+
+- **White Wine:** The trend is less pronounced, but the median citric acid levels remain relatively consistent across quality scores, with slightly higher values at the top end (score 9). Outliers are more frequent in the mid-range, but the overall distribution is stable.
+
+These plots suggest that citric acid may play a more important role in **red wine quality**, while its impact in white wine is likely more subtle or secondary.
+
+**Conclusion**
+
+This exploratory data analysis examined the relationship between wine quality and six key chemical properties: alcohol content, volatile acidity, residual sugar, pH, total sulfur dioxide, and citric acid — for both red and white wines.
+
+Among all variables, **alcohol content showed the strongest and most consistent positive association with wine quality** across both red and white wine. Higher-quality wines tended to have higher alcohol levels, a relationship later confirmed by a Pearson correlation test.
+
+**Volatile acidity** displayed a clear negative trend with quality, particularly in red wines, suggesting that lower acidity improves perceived quality. **Citric acid** also showed a positive association with quality in red wine, while **total sulfur dioxide** had a negative relationship with quality, especially in white wine, where excessive SO₂ levels are more common and potentially detrimental.
+
+In contrast, **residual sugar and pH** did not exhibit strong or consistent patterns relative to quality scores. These variables appear to have a more neutral or context-specific influence, possibly interacting with other features in more complex ways.
+
+Overall, the analysis suggests that **alcohol, volatile acidity, sulfur dioxide, and citric acid** are the most informative predictors of wine quality, and should be prioritized in further statistical modeling or predictive analysis.
 
 Note that the `echo = FALSE` parameter was added to the code chunk to prevent printing of the R code that generated the plot.
